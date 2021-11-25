@@ -6,10 +6,10 @@ import SignModalStyle from "./SignModalStyle.css";
 
 export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const [isLogin, setIsLogin] = useState(true)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
   const [message, setMessage] = useState('')
 
   const user = { firstName: firstName, lastName: lastName, username: username, password: password };
@@ -58,11 +58,12 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
       console.error('There was an error!', error);
   })
   .then(response => {
-    if(response.length > 0) {
-      {setMessage(<p style={{color: "red"}}>Username already taken</p>)}
+    console.log(response)
+    if (response.err) {
+      {setMessage(<p style={{color: "red"}}>{response.message}</p>)}
     }
-    console.log(response.length)
-    let temp = JSON.stringify(response)
+    else{{setMessage(<p style={{color: "black"}}>{response.message}</p>)}
+    }
   });
   }
 

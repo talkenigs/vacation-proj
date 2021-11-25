@@ -15,13 +15,12 @@ User.create = (newUser) => {
         sql.query(query, [newUser.username], function (err, result, fields) {
             if (err) throw err;
             if (result.length > 0) {
-                console.log("Unavailable username");
-                resolve({length: result.length})
+                resolve({message: "username taken", err: true})
             }
         })
+        resolve({message: "Added successfully", err: false})
     })
     // else {
-      console.log("success");
       // sql.query ("INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)", [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err,res) => {
       //     if (err) {
       //         console.log("error accured in sql query", err)
@@ -30,6 +29,7 @@ User.create = (newUser) => {
       //     }
       // })
     // }
+
 };
  
 User.test = (req) => {

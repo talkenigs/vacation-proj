@@ -5,6 +5,7 @@
     background-image: linear-gradient(rgba(138, 208, 255, 0), rgba(89, 169, 255, 0.7)), url("./assets/resort.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 .hero-img img{
     /* width: 100%;
@@ -16,8 +17,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    font-size: x-large;
+    text-shadow: 2px 0 0 rgba(123,123,123,255), -2px 0 0 rgba(123,123,123,255), 0 2px 0 rgba(123,123,123,255), 0 -2px 0 rgba(123,123,123,255), 1px 1px rgba(123,123,123,255), -1px -1px 0 rgba(123,123,123,255), 1px -1px 0 rgba(123,123,123,255), -1px 1px 0 rgba(123,123,123,255);
+    color: white;   
+    font-size: xx-large;
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
     text-align: center;

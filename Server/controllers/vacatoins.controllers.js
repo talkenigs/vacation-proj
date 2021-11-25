@@ -2,30 +2,26 @@ const { response } = require("express");
 const User = require("../models/user.model.js");
 
 exports.create = async (req, res) => {
-    if (!req.body) {
+
+  const user = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  for(i in user){
+    if (user[i] == undefined)  {
+      console.log("in")
         res.status(400).send({
-          message: "Content can not be empty!"
+          message: "Content can not be empty!", err: true
         });
       };
-      const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        password: req.body.password
-      });
+    }
+
+      
       const ans = await User.create(user)
       res.send(ans)
-      
-      // await (User.create(user))
-      // .then(res => res.json())
-      // .then(res => {
-      //   console.log(res)
-      // })
-      
-      
-      
-      
-
 
         // if (err)
         //   res.status(500).send({
@@ -33,7 +29,11 @@ exports.create = async (req, res) => {
         //       err.message || "Some error occurred while creating the user."
         //   }); 
       // };
+    
     };
+
+
+
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {
     User.getAll((err, data) => {
