@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+.main-div {
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(12,66,112,255);
+    height: 4rem;
+    width: 100%;
+}   
+
+.logo{
+    display: flex;
+    align-items: center;
+    width: 30%;
+    padding-left: 40px;
+}
+
+.logo img{
+    width: 4rem;
+}
+
+.logo span {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: x-large;
+}
+
+.menu{
+    width: 50%;
+}
+
+.menu span{
+    margin: 15px;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    color: white
+}

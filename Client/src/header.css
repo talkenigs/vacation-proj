@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    background: rgba(19,19,19,255)
+}
+
+.header div {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.header span, a{
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+}
+
+.header a ,span:hover{
+    cursor: pointer;
+}
+
+.header * {
+    margin: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(123,123,123,255)
+}
+
+
+

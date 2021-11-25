@@ -1,1 +1,3 @@
-# vacation-proj
+Reasources:
+
+Icons: https://fontawesome.com/
