@@ -1,6 +1,6 @@
 import React from 'react'
 import './menu.css'
-import Logo from "./assets/Logo.png";
+import Logo from './upload/projLogo.png'
 
 export default function Menu() {
     return (
@@ -15,5 +15,5 @@ export default function Menu() {
                 <span> Contact </span>
             </div>
         </div>
-    )
+    ) 
 }

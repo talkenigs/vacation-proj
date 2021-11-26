@@ -17,19 +17,16 @@ User.create = (newUser) => {
             if (result.length > 0) {
                 resolve({message: "username taken", err: true})
             }
+            else{
+                // var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)"
+                // sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
+                var queryIns = "select username FROM users"
+                sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
+                    resolve({message: "Added successfully", err: false})
+                })
+            }
         })
-        resolve({message: "Added successfully", err: false})
     })
-    // else {
-      // sql.query ("INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)", [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err,res) => {
-      //     if (err) {
-      //         console.log("error accured in sql query", err)
-      //     } else {
-      //         console.log("values inserted")
-      //     }
-      // })
-    // }
-
 };
  
 User.test = (req) => {

@@ -1,8 +1,8 @@
 .hero-img {
     position: relative;
     width: 100%;
-    height: 30rem;
-    background-image: linear-gradient(rgba(138, 208, 255, 0), rgba(89, 169, 255, 0.7)), url("./assets/resort.jpg");
+    height: 35rem;
+    background-image: linear-gradient(rgba(138, 208, 255, 0), rgba(89, 169, 255, 0.7)), url(./upload/resort.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 

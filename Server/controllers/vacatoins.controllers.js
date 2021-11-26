@@ -22,14 +22,6 @@ exports.create = async (req, res) => {
       
       const ans = await User.create(user)
       res.send(ans)
-
-        // if (err)
-        //   res.status(500).send({
-        //     message:
-        //       err.message || "Some error occurred while creating the user."
-        //   }); 
-      // };
-    
     };
 
 
