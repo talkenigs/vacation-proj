@@ -4,7 +4,7 @@ module.exports = app => {
     // Create a new Customer
     app.post("/create", Users.create);
 
-    app.post("/test", Users.test);
+    app.get("/login", Users.login);
 
     // (req, res) => {
     //   let { test } = req.body

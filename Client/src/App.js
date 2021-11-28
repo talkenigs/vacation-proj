@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Header from './header';
 import Menu from './Menu';
 import Hero from './Hero';
+import Catalog from './Catalog/Catalog';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <Header/>
     <Menu/>
     <Hero/>
+    <Catalog/>
     </>
   );
 }

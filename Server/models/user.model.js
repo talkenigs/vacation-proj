@@ -11,30 +11,47 @@ function User(user) {
 
 User.create = (newUser) => {
   var query = "SELECT username FROM users WHERE username = (?);";
-      return new Promise(resolve => {
-        sql.query(query, [newUser.username], function (err, result, fields) {
-            if (err) throw err;
-            if (result.length > 0) {
-                resolve({message: "username taken", err: true})
-            }
-            else{
-                // var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)"
-                // sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
-                var queryIns = "select username FROM users"
-                sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
-                    resolve({message: "Added successfully", err: false})
-                })
-            }
-        })
-    })
+  return new Promise((resolve) => {
+    sql.query(query, [newUser.username], function (err, result, fields) {
+      if (err) throw err;
+      if (result.length > 0) {
+        resolve({ message: "username taken", err: true });
+      } else {
+        // var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)"
+        // sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
+        var queryIns = "select username FROM users";
+        sql.query(
+          queryIns,
+          [
+            newUser.firstName,
+            newUser.lastName,
+            newUser.username,
+            newUser.password,
+          ],
+          (err, res) => {
+            resolve({ message: "Added successfully", err: false });
+          }
+        );
+      }
+    });
+  });
 };
- 
-User.test = (req) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(req.body)
-        }, 2000)
-    })
-}
+
+User.login = (username, password) => {
+  return new Promise((resolve) => {
+    var query = "SELECT username, password, first_name FROM users WHERE username = (?);";
+    sql.query(query, [username], function (err, result, fields) {
+      if (err) throw err;
+      if (result.length == 0) {
+        resolve({ message: "username not exist please sign up", err: true });
+      } else {
+        console.log(result[0].password);
+        if (password == result[0].password) {
+          resolve({ message: '', err: false });
+        }
+      }
+    });
+  });
+};
 
 module.exports = User;

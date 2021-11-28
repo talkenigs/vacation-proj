@@ -24,7 +24,10 @@ exports.create = async (req, res) => {
       res.send(ans)
     };
 
-
+exports.login = async (req, res) => {
+  const ans = await User.login(req.query.username, req.query.password)
+  res.send(ans)
+}
 
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {

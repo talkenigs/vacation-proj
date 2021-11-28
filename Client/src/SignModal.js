@@ -26,22 +26,6 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   }
 
   const addUser = async () => {
-    // await axios.post("http://127.0.0.1:4000/create", {
-    //   firstName: firstName, lastName: lastName, username: username, password: password  
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
-    //  await axios.post("http://127.0.0.1:4000/create", {firstName: firstName, lastName: lastName, username: username, password: password})
-    // .then(res=> {
-    //   console.log(res);
-    //   alert("successful insert");
-    // }).catch(err =>{
-    //   console.log(err)
-    // });
       await fetch("http://127.0.0.1:4000/create", {
       method: 'POST',
       mode: 'cors',
@@ -67,29 +51,24 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   });
   }
 
-  // const test = async () => {
-  //   await fetch("http://127.0.0.1:4000/test", {
-  //     method: 'POST',
-  //     mode: 'cors',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     redirect: 'follow',
-  //     referrerPolicy: 'no-referrer',  
-  //     body: JSON.stringify({test: "talll"})
-  //   })
-  //   .then(response => response.json())
-  //   .catch(error => {
-  //     console.error('There was an error!', error);
-  // })
-  // .then(response => {
-  //   console.log(response)
-  // })
-  // }
-
+  const login = async () => {
+    await axios.get("http://127.0.0.1:4000/login", {
+      params: {
+        username: username,
+        password: password
+      }
+    })
+    .then(response => {
+      console.log(response.data)
+      if(response.data.err){
+        {setMessage(<p style={{color: "red"}}>{response.data.message}</p>)}
+      }
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+  })
+}
   
-
   function logSwitch() {
       if (isLogin === false) {
       return (
@@ -109,12 +88,9 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
         <div className="btn-animate">
         <a className="btn-signin" onClick={() => addUser()}>Sign up</a>
         </div>
-        <div>
+        <div style={{marginTop:"-10px"}}>
         {message}
           </div>
-        {/* <div className="btn-animate">
-        <a className="btn-signin" onClick={() => test()}>test</a>
-        </div> */}
       </form>
       )} else {
           return (
@@ -125,6 +101,7 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
           type="text"
           name="username"
           placeholder=""
+          onChange={(event) => setUsername(event.target.value)}
         />
         <label for="password">Password</label>
         <input
@@ -132,13 +109,17 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
           type="text"
           name="password"
           placeholder=""
+          onChange={(event) => setPassword(event.target.value)}
         />
         <input type="checkbox" id="checkbox" />
         <label for="checkbox">
           <span className="ui"></span>Keep me signed in
         </label>
         <div className="btn-animate">
-        <a className="btn-signin">login</a>
+        <a className="btn-signin" onClick={() => login()}>Login</a>
+        </div>
+        <div>
+          {message}
         </div>
       </form>
       )}
@@ -157,10 +138,10 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
         <div className="sign-nav">
           <ul className="sign-links">
             <li className="login-active">
-              <a className="login-btn" onClick={()=>setIsLogin(true)}>login</a>
+              <a className="login-btn" onClick={()=>{setIsLogin(true); setMessage('')}}>login</a>
             </li>
             <li className="signup-inactive">
-             <a className="sign-btn" onClick={()=>setIsLogin(false)}>Sign up</a>
+             <a className="sign-btn" onClick={()=>{setIsLogin(false); setMessage('')}}>Sign up</a>
             </li>
           </ul>
         </div>
