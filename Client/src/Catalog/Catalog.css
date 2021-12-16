@@ -1,11 +1,12 @@
 .catalog-container {
     display: flex;
+    flex-wrap: wrap;     
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    margin-top:20px
-
+    margin-top:20px;
+    margin-bottom: 40px;
 }
 
 .catalog-header {
@@ -16,40 +17,45 @@
 }
 
 .catalog-container > div {
-    width: 500px;
+    position: relative;
+    flex-basis: 30%;    
     height: 300px;
+    margin-bottom: 120px;
 }
 
 .vac-box{
-    background-image: linear-gradient(rgba(138, 208, 255, 0), rgba(89, 169, 255, 0.7));
+    /* background-image: linear-gradient(rgba(138, 208, 255, 0), rgba(89, 169, 255, 0.7)); */
     background-repeat: no-repeat;
-  background-size: 500px;
-  height: 100%;
+    background-size: cover;
+    height: 100%;
 }
 
 .h1 {
     text-align: center;
 }
+
 .catalog-hr {
     width: 5%;
     background-color: rgb(96, 178, 255);
     border: 0 none;
     height: 3px; 
-    ;
 }
 
 .vacations-container{
     width: 100%;
-    height: 1000px;
 }
 
-.follow {
-    position: relative;
+.follow-btn {
     font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.follow-div {
     text-align: right;
+    position: relative;
     right: 10px;
-    margin: 0px;
-    top: 10px;
+    top: 10px; 
 }
 
 .vac-title {
@@ -96,4 +102,12 @@
     position: relative;
     top: 0;
     color: black;
+}
+
+.vac-details {
+    margin-bottom: 30px;
+}
+
+.clear{
+    clear: both;
 }

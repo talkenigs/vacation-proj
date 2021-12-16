@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { useState } from "react";
-import ReactDom from "react-dom";
+import { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
-import SignModalStyle from "./SignModalStyle.css";
+import "./SignModalStyle.css";
+import { UserContext } from "../Context/UserProvider";
 
 export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const [isLogin, setIsLogin] = useState(true)
@@ -11,8 +11,17 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [message, setMessage] = useState('')
+  const [userNow, setUserNow] = useState(() => {
+    const localData = localStorage.getItem('userNow')
+    return localData ? JSON.parse(localData) : [] 
+  });
 
-  const user = { firstName: firstName, lastName: lastName, username: username, password: password };
+  useEffect(() => {
+    localStorage.setItem('userNow', JSON.stringify(userNow))
+    setIsOpen(false);
+    }, [userNow]);
+
+  // const user = { firstName: firstName, lastName: lastName, username: username, password: password };
 
   if (!isOpen) return null;
 
@@ -42,7 +51,6 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
       console.error('There was an error!', error);
   })
   .then(response => {
-    console.log(response)
     if (response.err) {
       {setMessage(<p style={{color: "red"}}>{response.message}</p>)}
     }
@@ -54,14 +62,17 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const login = async () => {
     await axios.get("http://127.0.0.1:4000/login", {
       params: {
-        username: username,
+        username: username, 
         password: password
       }
     })
     .then(response => {
-      console.log(response.data)
       if(response.data.err){
         {setMessage(<p style={{color: "red"}}>{response.data.message}</p>)}
+      } else {
+        setUserNow({id: response.data.userId, username: response.data.username})
+        window.location.reload()
+
       }
     })
     .catch(error => {

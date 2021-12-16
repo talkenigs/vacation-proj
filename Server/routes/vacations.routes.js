@@ -1,10 +1,17 @@
 module.exports = app => {
-    const Users = require("../controllers/vacatoins.controllers");
+    const Users = require("../controllers/users.controllers");
+    const Vacations = require("../controllers/vacations.controller")
   
     // Create a new Customer
     app.post("/create", Users.create);
 
     app.get("/login", Users.login);
+
+    app.post("/addFollow", Vacations.Follow )
+
+    app.post("/delFollow", Vacations.delFollow )
+
+    app.get("/getvacations", Vacations.getVacations)
 
     // (req, res) => {
     //   let { test } = req.body

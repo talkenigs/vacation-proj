@@ -1,12 +1,13 @@
 import React from 'react'
 import './menu.css'
-import Logo from './upload/projLogo.png'
+
+// const logo = require('../upload/projLogo.png').default
 
 export default function Menu() {
     return (
         <div className="main-div">
             <div className="logo">
-                <img src={Logo}></img>
+                {/* <img src={require('../upload/projLogo.png').default}></img> */}
                 <span> VACATIONS </span>
             </div>
             <div className="menu">

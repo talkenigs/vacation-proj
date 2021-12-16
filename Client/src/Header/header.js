@@ -1,14 +1,17 @@
-import {useState} from "react";
+import {useState , useContext} from "react";
 import "./header.css";
 import SignModal from "./SignModal";
 import { FaEnvelope } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { BsPersonCircle } from "react-icons/bs";
+import { UserContext, UserProvider } from "../Context/UserProvider";
+
 
 export default function Header() {
   let subtitle;
   const [isOpen, setIsOpen] = useState(false);
-
+  const userNow = useContext(UserContext)
+  console.log(userNow)
 
   function openModal() {
     setIsOpen(true);

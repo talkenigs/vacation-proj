@@ -10,16 +10,15 @@ exports.create = async (req, res) => {
     password: req.body.password
   });
 
+  //check if input missing
   for(i in user){
     if (user[i] == undefined)  {
-      console.log("in")
         res.status(400).send({
           message: "Content can not be empty!", err: true
         });
       };
     }
 
-      
       const ans = await User.create(user)
       res.send(ans)
     };
