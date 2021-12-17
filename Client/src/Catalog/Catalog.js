@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import "./Catalog.css";
 import { GoLocation } from "react-icons/go";
-import { AiFillStar  } from "react-icons/ai";
+import { AiFillStar, AiOutlineEdit } from "react-icons/ai";
 import Follow from "./Follow";
 import axios from "axios";
 import { UserContext } from "../Context/UserProvider";
-
+import GetVacations from "./GetVacations";
 
 export default function Catalog() {
-  const [vacationList, setList] = useState(null);
   const userNow = useContext(UserContext)
+  const [vacationList, setList] = useState(null);
 
   useEffect(() => {
     const fetchList = async () => {
@@ -69,6 +69,6 @@ export default function Catalog() {
         </div>
         <div className="clear"></div>
       </div>)}</div>
-    </>
+  </>
   );
 }
