@@ -1,0 +1,76 @@
+
+.vac-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.vac-del {
+    text-align: right;
+    margin-right: 10px;
+    padding-top: 10px;
+
+}
+
+.vac-edit {
+    text-align: right; 
+    margin-right: 10px;
+
+}
+
+.vac-dates-edit {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem;
+    top: 120px;
+    left: 20px;
+    margin: 0;
+    
+}
+
+.vac-price-edit {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem;
+    top: 130px;
+    left: 20px;
+    margin: 0;
+}
+
+.vac-country-edit {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem;
+    top: 150px;
+    left: 20px;
+    margin: 0;
+}
+
+.del-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 1.2rem;
+}
+
+.edit-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 1.2rem;
+}
+
+.input {
+    color: black;
+}

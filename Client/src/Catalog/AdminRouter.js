@@ -11,9 +11,9 @@ function CatalogRouter() {
     const userNow = useContext(UserContext)
 
     function AdminEdit() {
-        if (userNow.username == admin) {
+        if (userNow.username === admin) {
           return (
-            <Router>
+            <Router> 
             <Link to="/"></Link>
             <Link to="/AdminEdit"><p><AiOutlineEdit /> Edit</p></Link>
             <Routes>

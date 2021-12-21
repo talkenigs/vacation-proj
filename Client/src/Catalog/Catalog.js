@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import "./Catalog.css";
 import { GoLocation } from "react-icons/go";
-import { AiFillStar, AiOutlineEdit } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import Follow from "./Follow";
 import axios from "axios";
 import { UserContext } from "../Context/UserProvider";
@@ -33,8 +33,7 @@ export default function Catalog() {
       setList(allList);
       };
     fetchList();
-  });
-
+  }, []);
   const franceImg = require("../upload/France.jpg").default
 
   return (

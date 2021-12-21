@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
 app.use(cors())
 app.use(express.json());
@@ -18,6 +20,13 @@ app.get("/", (req, res) => {
   });
 
   require("./routes/vacations.routes")(app);
+
+  io.on('connection', (socket) => { 
+    console.log(socket.id)
+    socket.on('message', msg => {
+      io.emit('message', msg);
+    });
+  });
 
   const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

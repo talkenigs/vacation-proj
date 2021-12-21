@@ -31,5 +31,23 @@ function Vacation(vacation) {
     });
   };
 
+  Vacation.delVacation = (vacationId) => {
+    let queryDel =  "DELETE FROM vacations WHERE vacation_id = (?);"
+    return new Promise((resolve) => {
+      sql.query(queryDel, [vacationId], (err, result) => {
+        if (err) throw err;
+        resolve({message: "Deleted"})
+      })
+    })}
+
+    Vacation.updateVacation = (id, title, dates, price, country) => {
+      let queryPut =  "UPDATE vacations SET title=(?), dates=(?), price=(?), country=(?) WHERE vacation_id = (?);"
+      return new Promise((resolve) => {
+        sql.query(queryPut, [title, dates, price, country, id], (err, result) => {
+          if (err) throw err;
+          resolve({message: "updated", result: result})
+        })
+      })}
+
 
   module.exports = Vacation

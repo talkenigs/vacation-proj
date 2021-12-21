@@ -19,9 +19,9 @@ exports.Follow = async (req, res) => {
     }
 }
 
-exports.delFollow = async (req, res) => {
-  res.send({message: "hello"})
-}
+// exports.delFollow = async (req, res) => {
+//   res.send({message: "done"})
+// }
 
 exports.getVacations = async (req, res) => {
     const vacList = await Vacations.getAllVacs()
@@ -30,3 +30,13 @@ exports.getVacations = async (req, res) => {
     // console.log(ans.userList.listUser[0].vacation_id)
     res.send(ans)
     }
+
+exports.delVacation = async (req, res) => {
+  let ans = await Vacations.delVacation(req.body.vacationId)
+  res.send(ans)
+}
+
+exports.updateVacation = async (req, res) => {
+  let ans = await Vacations.updateVacation(req.body.id, req.body.title, req.body.dates, req.body.price, req.body.country)
+  res.send(ans)
+}

@@ -11,7 +11,6 @@ export default function Header() {
   let subtitle;
   const [isOpen, setIsOpen] = useState(false);
   const userNow = useContext(UserContext)
-  console.log(userNow)
 
   function openModal() {
     setIsOpen(true);

@@ -39,14 +39,14 @@ User.create = (newUser) => {
 
 User.login = (username, password) => {
   return new Promise((resolve) => {
-    var query = "SELECT id, username, password, first_name FROM users WHERE username = (?);";
+    var query = "SELECT user_id, username, password, first_name FROM users WHERE username = (?);";
     sql.query(query, [username], function (err, result, fields) {
       if (err) throw err;
       if (result.length == 0) {
         resolve({ message: "username not exist please sign up", err: true });
       } else {
         if (password == result[0].password) {
-          resolve({ message: 'Welcome Back!', err: false, userId: result[0].id, username: result[0].username});
+          resolve({ message: 'Welcome Back!', err: false, userId: result[0].user_id, username: result[0].username});
         }
       }
     });
