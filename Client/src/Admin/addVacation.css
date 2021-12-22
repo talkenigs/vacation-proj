@@ -1,0 +1,39 @@
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 60px;
+    padding-bottom: 100px;
+    outline: none; 
+  }
+
+  .add-frame {
+    height: 270px;
+    width: 250px;
+    background:
+      linear-gradient(
+      rgba(35,43,85,0.75),
+      rgba(35,43,85,0.95)),
+      url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
+      background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: solid 1px rgba(255,255,255,.5);
+  border-radius: 5px;
+  box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+  overflow: hidden;
+  transition: all .5s ease;
+}
+
+.form-add {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.input-div {
+    width: 50%;
+    overflow: hidden;
+}

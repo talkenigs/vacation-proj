@@ -3,41 +3,23 @@ import "./Catalog.css";
 import { GoLocation } from "react-icons/go";
 import { AiFillStar } from "react-icons/ai";
 import Follow from "./Follow";
-import axios from "axios";
 import { UserContext } from "../Context/UserProvider";
-import GetVacations from "./GetVacations";
+import { VacationsContext} from '../Context/VacationsProvider'
 
-export default function Catalog() {
+export default function Catalog(props) {
   const userNow = useContext(UserContext)
-  const [vacationList, setList] = useState(null);
-
-  useEffect(() => {
-    const fetchList = async () => {
-      const response = await axios.get("http://127.0.0.1:4000/getvacations", {
-        params: {
-          user: userNow.id
-        }
-      });
-      let userList = response.data.userList.listUser
-      let allList = response.data.vacList.listAll
-      if (userList.length > 0) {
-      for (let i in userList) {
-      for (let j in allList) {
-        if(allList[j].vacation_id === userList[i].vacation_id) {
-          let tempVac = allList[j]
-          tempVac.isUser = true
-        allList.splice(j, 1)
-        allList.splice(0, 0, tempVac)
-            }
-      }}}
-      setList(allList);
-      };
-    fetchList();
-  }, []);
+  const vacationList = useContext(VacationsContext)
   const franceImg = require("../upload/France.jpg").default
+  const [socketDisplay, setSocketDisplay] = useState("TEMP")
+  
+  // props.socket.on("update_catalog", (data) => {
+  //   console.log("ASas")
+  //   setSocketDisplay(data)
+  // })
 
   return (
     <>
+    {socketDisplay}
       <div className="catalog-header">
         <h1>Top Destionation</h1>
         <hr className="catalog-hr"></hr>

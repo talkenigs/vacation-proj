@@ -49,5 +49,14 @@ function Vacation(vacation) {
         })
       })}
 
+      Vacation.addVacation = (title, country, dates, price) => {
+        let queryAdd = "INSERT INTO vacations (title, country, dates, price) VALUES ((?),(?),(?),(?));"
+        return new Promise((resolve) => {
+          sql.query(queryAdd, [title, country, dates, price], (err, result) => {
+            if (err) throw err;
+            resolve({message: "updated", result: result})
+          })
+        })}
+
 
   module.exports = Vacation

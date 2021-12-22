@@ -40,3 +40,8 @@ exports.updateVacation = async (req, res) => {
   let ans = await Vacations.updateVacation(req.body.id, req.body.title, req.body.dates, req.body.price, req.body.country)
   res.send(ans)
 }
+
+exports.addVacation = async (req, res) => {
+  let ans =  await Vacations.addVacation(req.body.title, req.body.country, req.body.dates, req.body.price)
+  res.send(ans)
+}

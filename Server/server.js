@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const server = require('http').createServer(app);
+const { Server, Socket } = require("socket.io");
 
 app.use(cors())
 app.use(express.json());
@@ -21,14 +21,22 @@ app.get("/", (req, res) => {
 
   require("./routes/vacations.routes")(app);
 
-  io.on('connection', (socket) => { 
-    console.log(socket.id)
-    socket.on('message', msg => {
-      io.emit('message', msg);
-    });
+  const io = new Server(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+    },
   });
 
+  io.on('connection', (socket) => { 
+    socket.on('update_catalog', (data) => { 
+      socket.emit('update_catalog', data)
+    });   
+  });
+
+  
+
   const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

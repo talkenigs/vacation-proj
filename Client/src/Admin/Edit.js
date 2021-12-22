@@ -1,18 +1,21 @@
 import React, { useContext, useState } from 'react'
 import '../Catalog/Catalog.css'
-import { MdDelete } from "react-icons/md"
 import { FaEdit } from "react-icons/fa"
 import './Edit.css'
 import axios from 'axios';
 import { VacationsContext} from '../Context/VacationsProvider'
-import io from 'socket.io-client'
+import FirstContent from './FirstContent'
+import EditMode from './EditMode'
+import AddVacation from './AddVacation';
 
-// const socket = io.connect("http://127.0.0.1:4000")
 
-function Edit() {
+
+function Edit(props) {
     const [isEdit, setIsEdit] = useState(false)
     const [vacationId, setVacationId] = useState()
     const vacationList = useContext(VacationsContext)
+    const [isOpen, setIsOpen] = useState(false);
+    let subtitle;
 
     const DeleteVacation = async (vacationId) => {
         await axios.post("http://127.0.0.1:4000/delVacation", {
@@ -28,26 +31,6 @@ function Edit() {
       };
 
       const franceImg = require("../upload/France.jpg").default
-
-      const editContent = () => {
-        return (
-          <>
-             <button>Add Vacation</button> 
-             <div className="catalog-container">{vacationList && vacationList.map((vacation) => <div key={vacation.vacation_id} className="vacations-container">
-          <div
-            className="vac-box"
-            style={{
-              backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${franceImg})`,
-            }}
-          >
-               <p className="vac-del"><button className="del-btn" onClick={() => DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 
-                {isToEdit(vacation.vacation_id, vacation.title, vacation.dates, vacation.price, vacation.country)}
-          </div>
-          <div className="clear"></div>
-        </div>)}</div>
-          </>
-      )
-      };
 
       const isToEdit = (id, title, dates, price, country) => {
         if (id === vacationId) {
@@ -93,11 +76,6 @@ function Edit() {
         country = event.target.price.value
       }
       updateVacation(vacationId, title, dates, price, country)
-      // if (title !=null || dates != null || price != null || country !=null){
-      //  updateVacation(vacationId, title, dates, price, country)
-      // } else{
-      //   setIsEdit(false)
-      // }
       }
 
       const updateVacation = async (id, title, dates, price, country) => {
@@ -112,34 +90,30 @@ function Edit() {
         console.error("There was an error!", error);
       })
       .then((response) => {
-        console.log(response.data.message);
-        console.log(response.data.result);
+      //   props.socket.emit("update_catalog", {
+      //     id: id,
+      //     title: title,
+      //     dates: dates,
+      //     price: price,
+      //     country: country
+      // })
         // window.location.reload()
       });
       }
 
-    const firstContent = () => {
+      const socketHandle = () => {
+        let data = "dataTemp"
+        props.socket.emit("update_catalog", data)
+      }   
+
+    const firstContent = () => {  
         return (
-        <>
-           <button>Add Vacation</button> 
-           <div className="catalog-container">{vacationList && vacationList.map((vacation) => <div key={vacation.vacation_id} className="vacations-container">
-        <div
-          className="vac-box"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${franceImg})`,
-          }}
-        >
-             <p className="vac-del"><button className="del-btn" onClick={() => DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 
-            <div className="vac-row">
-            <p className="vac-title">{vacation.title}</p> 
-            <p className="vac-edit"><button className="edit-btn" onClick={() => handleEdit(vacation.vacation_id)}><FaEdit /></button></p> 
-            </div>
-          <p className="vac-dates-edit">{vacation.dates}</p>
-          <p className="vac-price-edit">{vacation.price}$</p>
-        </div>
-        <div className="clear"></div>
-      </div>)}</div>
-        </>
+            <FirstContent socketHandle={socketHandle} DeleteVacation={DeleteVacation} handleEdit={handleEdit} />
+    )};
+
+    const editContent = () => {
+      return (
+        <EditMode vacationToEdit={vacationId} DeleteVacation={DeleteVacation} isToEdit={isToEdit} />      
     )};
 
     const handleEdit = (id) => {
@@ -147,7 +121,21 @@ function Edit() {
       setIsEdit(true)
     }
 
-    return isEdit? editContent() : firstContent()
+    const openModal = () => {
+      setIsOpen(true)
+    }
+
+    return (
+      <>
+      <button onClick={openModal}>Add Vacation</button>
+      <AddVacation isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                subtitle={subtitle}
+                >
+      </AddVacation>
+      {isEdit? editContent() : firstContent()}
+      </>
+    )
 }
 
 export default Edit
