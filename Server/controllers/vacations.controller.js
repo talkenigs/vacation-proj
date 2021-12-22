@@ -45,3 +45,8 @@ exports.addVacation = async (req, res) => {
   let ans =  await Vacations.addVacation(req.body.title, req.body.country, req.body.dates, req.body.price)
   res.send(ans)
 }
+
+exports.getChart = async (req, res) => {
+  let ans =  await Follow.getChart()
+  res.send(ans)
+}

@@ -27,6 +27,8 @@ export function VacationsProvider({ children }) {
                    }
              }}
              setList(allList)
+         }else{
+          setList(allList)
          }})
            }, []);
 

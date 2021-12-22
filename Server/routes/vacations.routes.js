@@ -16,4 +16,6 @@ module.exports = app => {
     app.put("/updateVacation", Vacations.updateVacation)
 
     app.post("/addVacation", Vacations.addVacation)
+
+    app.get("/getChart", Vacations.getChart)
   };

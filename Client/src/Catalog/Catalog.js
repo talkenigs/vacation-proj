@@ -9,9 +9,8 @@ import { VacationsContext} from '../Context/VacationsProvider'
 export default function Catalog(props) {
   const userNow = useContext(UserContext)
   const vacationList = useContext(VacationsContext)
+  console.log(vacationList)
   const franceImg = require("../upload/France.jpg").default
-  const [socketDisplay, setSocketDisplay] = useState("TEMP")
-  
   // props.socket.on("update_catalog", (data) => {
   //   console.log("ASas")
   //   setSocketDisplay(data)
@@ -19,7 +18,6 @@ export default function Catalog(props) {
 
   return (
     <>
-    {socketDisplay}
       <div className="catalog-header">
         <h1>Top Destionation</h1>
         <hr className="catalog-hr"></hr>

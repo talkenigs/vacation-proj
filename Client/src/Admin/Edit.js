@@ -8,8 +8,6 @@ import FirstContent from './FirstContent'
 import EditMode from './EditMode'
 import AddVacation from './AddVacation';
 
-
-
 function Edit(props) {
     const [isEdit, setIsEdit] = useState(false)
     const [vacationId, setVacationId] = useState()

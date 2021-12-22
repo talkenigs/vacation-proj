@@ -32,6 +32,15 @@ function Follow(follow) {
         resolve({ message: "Deleted", err: false });
   })  
   })};
+
+  Follow.getChart = () => {
+    let queryChart = "select follows.vacation_id, vacations.title, count(user_id) as follows from follows inner join vacations on follows.vacation_id = vacations.vacation_id group by vacation_id"
+    return new Promise((resolve) => {
+      sql.query(queryChart, (err, result) => {
+        if (err) throw err;
+        resolve({ message: "done", data: result})
+      })
+    })}
         
 
 module.exports = Follow

@@ -17,23 +17,11 @@ User.create = (newUser) => {
       if (result.length > 0) {
         resolve({ message: "username taken", err: true });
       } else {
-        // var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)"
-        // sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
-        let queryIns = "select username FROM users";
-        sql.query(
-          queryIns,
-          [
-            newUser.firstName,
-            newUser.lastName,
-            newUser.username,
-            newUser.password,
-          ],
-          (err, res) => {
+        var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES ((?),(?),(?),(?))"
+        sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
             resolve({ message: "Added successfully", err: false });
-          }
-        );
-      }
-    });
+          });
+      }});
   });
 };
 
