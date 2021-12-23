@@ -28,8 +28,6 @@ function Edit(props) {
         }); 
       };
 
-      const franceImg = require("../upload/France.jpg").default
-
       const isToEdit = (id, title, dates, price, country) => {
         if (id === vacationId) {
          return (
@@ -88,25 +86,20 @@ function Edit(props) {
         console.error("There was an error!", error);
       })
       .then((response) => {
-      //   props.socket.emit("update_catalog", {
-      //     id: id,
-      //     title: title,
-      //     dates: dates,
-      //     price: price,
-      //     country: country
-      // })
-        // window.location.reload()
+        props.socket.emit("update_catalog", {
+          vacation_id: id,
+          country: country,
+          title: title,
+          dates: dates,
+          price: price
+      })
+        setIsEdit(false)
       });
       }
 
-      const socketHandle = () => {
-        let data = "dataTemp"
-        props.socket.emit("update_catalog", data)
-      }   
-
     const firstContent = () => {  
         return (
-            <FirstContent socketHandle={socketHandle} DeleteVacation={DeleteVacation} handleEdit={handleEdit} />
+            <FirstContent socket={props.socket} DeleteVacation={DeleteVacation} handleEdit={handleEdit} />
     )};
 
     const editContent = () => {

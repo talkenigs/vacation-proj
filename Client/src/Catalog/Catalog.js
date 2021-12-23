@@ -8,13 +8,23 @@ import { VacationsContext} from '../Context/VacationsProvider'
 
 export default function Catalog(props) {
   const userNow = useContext(UserContext)
-  const vacationList = useContext(VacationsContext)
-  console.log(vacationList)
-  const franceImg = require("../upload/France.jpg").default
-  // props.socket.on("update_catalog", (data) => {
-  //   console.log("ASas")
-  //   setSocketDisplay(data)
-  // })
+  const vacationList = useContext(VacationsContext)  
+  const [newList, setNew] = useState(null)
+
+  props.socket.on("catalog_update", (data) => {
+    for (let i in vacationList) {
+      if (vacationList[i].vacation_id === data.vacation_id) {
+        vacationList[i].title = data.title
+        vacationList[i].country = data.copuntry
+        vacationList[i].dates = data.dates
+        vacationList[i].price = data.price
+      }
+    }
+    setNew(true)
+  })
+  
+  useEffect(() => {
+  }, [newList])
 
   return (
     <>
@@ -26,7 +36,7 @@ export default function Catalog(props) {
         <div
           className="vac-box"
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${franceImg})`,
+            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${require("../upload/"+vacation.title+".jpg").default})`
           }}
         >
           <Follow vacationId={vacation.vacation_id} isUser = {vacation.isUser ? true : false}/>

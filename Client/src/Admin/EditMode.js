@@ -6,7 +6,6 @@ import './Edit.css'
 
 function EditMode(props) {
     const vacationList = useContext(VacationsContext)
-    const franceImg = require("../upload/France.jpg").default
 
     return (
         <>
@@ -14,7 +13,7 @@ function EditMode(props) {
           <div
             className="vac-box"
             style={{
-              backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${franceImg})`,
+              backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${require("../upload/"+vacation.title+".jpg").default})`,
             }}
           >
                <p className="vac-del"><button className="del-btn" onClick={() => props.DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 

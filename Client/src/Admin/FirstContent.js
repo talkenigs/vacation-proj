@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { VacationsContext} from '../Context/VacationsProvider'
 import '../Catalog/Catalog.css'
 import { MdDelete } from "react-icons/md"
@@ -7,16 +7,30 @@ import './Edit.css'
 
 function FirstContent(props) {
     const vacationList = useContext(VacationsContext)
-    const franceImg = require("../upload/France.jpg").default
+    const [newList, setNew] = useState(null)
+
+    props.socket.on('catalog_update', (data) => {
+      for (let i in vacationList) {
+        if (vacationList[i].vacation_id === data.vacation_id) {
+          vacationList[i].title = data.title
+          vacationList[i].country = data.copuntry
+          vacationList[i].dates = data.dates
+          vacationList[i].price = data.price
+        }
+      }
+      setNew(true)
+    })
+
+    useEffect(() => {
+    }, [newList])
 
     return (
         <>
-           <button onClick={() => props.socketHandle()}>socket test</button> 
            <div className="catalog-container">{vacationList && vacationList.map((vacation) => <div key={vacation.vacation_id} className="vacations-container">
         <div
           className="vac-box"
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${franceImg})`,
+            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(3,4,4,0.7371323529411764) 100%), url(${require("../upload/"+vacation.title+".jpg").default})`,
           }}
         >
              <p className="vac-del"><button className="del-btn" onClick={() => props.DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 

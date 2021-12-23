@@ -1,3 +1,5 @@
 Reasources:
 
-Icons: https://fontawesome.com/
+Icons: https://react-icons.github.io/react-icons/
+
+Design: themeforest.net   

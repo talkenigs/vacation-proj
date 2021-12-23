@@ -16,7 +16,7 @@ export function VacationsProvider({ children }) {
            }).then((res) => {
              let userList = res.data.userList.listUser
              let allList = res.data.vacList.listAll
-             if (userList.length > 0) {
+            //  if (userList.length > 0) {
              for (let i in userList) {
              for (let j in allList) {
                if(allList[j].vacation_id === userList[i].vacation_id) {
@@ -27,9 +27,7 @@ export function VacationsProvider({ children }) {
                    }
              }}
              setList(allList)
-         }else{
-          setList(allList)
-         }})
+         })
            }, []);
 
     return (

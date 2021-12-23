@@ -12,9 +12,6 @@ function CatalogRouter() {
     const socket = io.connect("http://127.0.0.1:4000") 
     const admin = 'x'
     const userNow = useContext(UserContext)
-  socket.on("update_catalog", (data) => {
-    console.log("test")
-  })
 
     function AdminEdit() {
         if (userNow.username === admin) {

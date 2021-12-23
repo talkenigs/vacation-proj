@@ -30,11 +30,10 @@ app.get("/", (req, res) => {
 
   io.on('connection', (socket) => { 
     socket.on('update_catalog', (data) => { 
-      socket.emit('update_catalog', data)
+      console.log(data)
+      socket.emit('catalog_update', data)
     });   
   });
-
-  
 
   const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
