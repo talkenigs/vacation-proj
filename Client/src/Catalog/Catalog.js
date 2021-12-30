@@ -16,7 +16,8 @@ export default function Catalog(props) {
       if (vacationList[i].vacation_id === data.vacation_id) {
         vacationList[i].title = data.title
         vacationList[i].country = data.copuntry
-        vacationList[i].dates = data.dates
+        vacationList[i].start_date = data.start_date
+        vacationList[i].end = data.end
         vacationList[i].price = data.price
       }
     }
@@ -40,9 +41,9 @@ export default function Catalog(props) {
           }}
         >
           <Follow vacationId={vacation.vacation_id} isUser = {vacation.isUser ? true : false}/>
-          <p className="vac-title">{vacation.title}</p>
-          <p className="vac-dates">{vacation.dates}</p>
-          <p className="vac-price">{vacation.price}$</p>
+          <p className="data vac-title">{vacation.title}</p>
+          <p className="data vac-dates">{vacation.start_date.match(/.+?(?=T)/gm)} to {vacation.end_date.match(/.+?(?=T)/gm)}</p>
+          <p className="data vac-price">{vacation.price}$</p>
         </div>
         <div className="vac-details">
           <p className="vac-country">

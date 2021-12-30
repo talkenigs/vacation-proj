@@ -10,12 +10,13 @@ React  | Interface
 Node.js  | Server
 MySql  | Database
 Axios  | Api services
+JWT  | authentication
 
 ## DATABASE STRUCTURE  ##
 * users
     * user_id, first_name, last_name, username, password
 * vacations
-    * vacation_id, title, country, dates, price
+    * vacation_id, title, country, start_date, price, end_date
 * follows
     * follow_id, user_id, vacation_id
 

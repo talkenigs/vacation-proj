@@ -6,6 +6,7 @@ import Hero from '../Hero/Hero';
 import { UserProvider } from '../Context/UserProvider'
 import { VacationsProvider } from '../Context/VacationsProvider'
 import AdminRouter from '../Catalog/AdminRouter';
+import CheckToken from '../Token/checkToken'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <>
     <UserProvider>
     <VacationsProvider>
+    {/* <CheckToken/> */}
     <Header/>
     <Menu/>
     <Hero/>

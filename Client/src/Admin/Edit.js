@@ -28,42 +28,48 @@ function Edit(props) {
         }); 
       };
 
-      const isToEdit = (id, title, dates, price, country) => {
+      const isToEdit = (id, title, start_date, price, country, end_date) => {
         if (id === vacationId) {
          return (
           <form onSubmit={handleSubmit}>
             <div className="vac-row">
-          <input type="text" name="title" className="vac-title input" placeholder={title}/>
+          <input type="text" name="title" className="data vac-title input" placeholder={title}/>
           <input type="submit" />
           </div>
-          <input type="text" name="dates" className="vac-dates-edit input" placeholder={dates}/>
-          <input type="text" name="price" className="vac-price-edit input" placeholder={price}/>
-          <input type="text" name="country" className="vac-country-edit input" placeholder={country}/>
+          <input type="text" name="startDate" className="data vac-dates-edit input" placeholder={start_date.match(/.+?(?=T)/gm)}/>
+          <input type="text" name="endDate" className="data vac-dates-edit input" placeholder={end_date.match(/.+?(?=T)/gm)}/>
+          <input type="text" name="price" className="data vac-price-edit input" placeholder={price}/>
+          <input type="text" name="country" className="data vac-country-edit-inp input" placeholder={country}/>
           </form>
          )
         } else {
          return (
            <>
          <div className="vac-row">
-         <p className="vac-title">{title}</p> 
-         <p className="vac-edit"><button className="edit-btn" onClick={() => handleEdit(id)}><FaEdit /></button></p> 
+         <p className="data vac-title">{title}</p> 
+         <p className="data vac-edit"><button className="edit-btn" onClick={() => handleEdit(id)}><FaEdit /></button></p> 
          </div>
-       <p className="vac-dates-edit">{dates}</p>
-       <p className="vac-price-edit">{price}$</p>
+       <p className="data vac-dates-edit">{start_date.match(/.+?(?=T)/gm)} to {end_date.match(/.+?(?=T)/gm)}</p>
+       <p className="data vac-price-edit">{price}$</p>
+       <p className="data vac-country-edit-inp">{country}</p>
        </>
        )}};
 
       const handleSubmit = (event) => {
         event.preventDefault();
         let title = event.target.title.placeholder
-        let dates = event.target.dates.placeholder
+        let start_date = event.target.startDate.placeholder
+        let end_date = event.target.endDate.placeholder
         let price = event.target.price.placeholder
         let country = event.target.country.placeholder
         if (event.target.title.value != '') {
         title = event.target.title.value
       }
-      if (event.target.dates.value != '') {
-        dates = event.target.dates.value
+      if (event.target.startDate.value != '') {
+        start_date = event.target.startDate.value
+      }
+      if (event.target.endDate.value != '') {
+        end_date = event.target.endDate.value
       }
       if (event.target.price.value != '') {
         price = event.target.price.value
@@ -71,29 +77,32 @@ function Edit(props) {
       if (event.target.country.value != '') {
         country = event.target.price.value
       }
-      updateVacation(vacationId, title, dates, price, country)
+      console.log(start_date, price, country, end_date)
+      updateVacation(vacationId, title, start_date, price, country, end_date)
       }
 
-      const updateVacation = async (id, title, dates, price, country) => {
+      const updateVacation = async (id, title, start_date, price, country, end_date) => {
         await axios.put("http://127.0.0.1:4000/updateVacation", {
           id: id,
           title: title,
-          dates: dates,
+          start_date: start_date,
           price: price,
-          country: country
+          country: country,
+          end_date: end_date
       })
       .catch((error) => {
         console.error("There was an error!", error);
       })
       .then((response) => {
+        setIsEdit(false)
         props.socket.emit("update_catalog", {
           vacation_id: id,
           country: country,
           title: title,
-          dates: dates,
+          start_date: start_date,
+          end_date: end_date,
           price: price
       })
-        setIsEdit(false)
       });
       }
 
@@ -104,7 +113,7 @@ function Edit(props) {
 
     const editContent = () => {
       return (
-        <EditMode vacationToEdit={vacationId} DeleteVacation={DeleteVacation} isToEdit={isToEdit} />      
+        <EditMode DeleteVacation={DeleteVacation} isToEdit={isToEdit} />      
     )};
 
     const handleEdit = (id) => {
@@ -124,7 +133,7 @@ function Edit(props) {
                 subtitle={subtitle}
                 >
       </AddVacation>
-      {isEdit? editContent() : firstContent()}
+      {isEdit ? editContent() : firstContent()}
       </>
     )
 }

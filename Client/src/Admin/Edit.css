@@ -8,7 +8,6 @@
     text-align: right;
     margin-right: 10px;
     padding-top: 10px;
-
 }
 
 .vac-edit {
@@ -18,38 +17,28 @@
 }
 
 .vac-dates-edit {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
     top: 120px;
-    left: 20px;
-    margin: 0;
-    
+    left: 20px;   
 }
 
 .vac-price-edit {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
     top: 130px;
     left: 20px;
-    margin: 0;
 }
 
 .vac-country-edit {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
-    top: 150px;
+    color: black;
+    top: 10px;
     left: 20px;
-    margin: 0;
 }
+
+.vac-country-edit-inp {
+    color: black;
+    top: 160px;
+    left: 20px;
+}
+
+
 
 .del-btn {
     background-color: transparent;

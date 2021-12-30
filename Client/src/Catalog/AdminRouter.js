@@ -10,11 +10,10 @@ import io from 'socket.io-client'
 
 function CatalogRouter() {
     const socket = io.connect("http://127.0.0.1:4000") 
-    const admin = 'x'
+    const admin = 18
     const userNow = useContext(UserContext)
-
     function AdminEdit() {
-        if (userNow.username === admin) {
+        if (userNow.id === admin) {
           return (
             <Router> 
             <Link to="/"></Link>

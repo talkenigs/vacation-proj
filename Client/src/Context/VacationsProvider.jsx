@@ -9,6 +9,7 @@ export function VacationsProvider({ children }) {
     const [vacList, setList] = useState()
 
     useEffect(() => {    
+      console.log('test')
         axios.get("http://127.0.0.1:4000/getvacations", {
              params: {
                user: userNow.id
@@ -25,7 +26,7 @@ export function VacationsProvider({ children }) {
                allList.splice(j, 1)
                allList.splice(0, 0, tempVac)
                    }
-             }}
+             }}            
              setList(allList)
          })
            }, []);

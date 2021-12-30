@@ -30,7 +30,6 @@ app.get("/", (req, res) => {
 
   io.on('connection', (socket) => { 
     socket.on('update_catalog', (data) => { 
-      console.log(data)
       socket.emit('catalog_update', data)
     });   
   });

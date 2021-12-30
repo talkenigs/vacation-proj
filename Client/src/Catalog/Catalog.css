@@ -60,37 +60,27 @@
 
 .vac-title {
     width: 50%;
+    top: 0px;
+    left: 20px;
+}
+
+.data {
     position: relative;
     font-family: 'Raleway', sans-serif;
     font-weight: bold;
     color: white;
     font-size: 1.5rem;
-    top: 0px;
-    left: 20px;
     margin: 0;
 }
 
 .vac-dates {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
     top: 165px;
-    left: 20px;
-    margin: 0;
-    
+    left: 20px;  
 }
 
 .vac-price {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
     top: 175px;
     left: 20px;
-    margin: 0;
 }
 
 .vac-country{

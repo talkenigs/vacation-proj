@@ -1,5 +1,7 @@
-const { response } = require("express");
+// const { response } = require("express");
 const sql = require("./db.js");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // constructor
 function User(user) {
@@ -15,11 +17,12 @@ User.create = (newUser) => {
     sql.query(query, [newUser.username], function (err, result, fields) {
       if (err) throw err;
       if (result.length > 0) {
-        resolve({ message: "username taken", err: true });
+        resolve({ message: "Username taken", err: true });
       } else {
-        var queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES ((?),(?),(?),(?))"
-        sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, newUser.password], (err, res) => {
-            resolve({ message: "Added successfully", err: false });
+        let password = bcrypt.hashSync(newUser.password, 8)
+        const queryIns = "INSERT INTO users (first_name, last_name, username, password) VALUES ((?),(?),(?),(?))"
+        sql.query(queryIns, [newUser.firstName, newUser.lastName, newUser.username, password], (err, res) => {
+            resolve({ message: "Added successfully", err: false, id: res.insertId});
           });
       }});
   });
@@ -33,12 +36,24 @@ User.login = (username, password) => {
       if (result.length == 0) {
         resolve({ message: "username not exist please sign up", err: true });
       } else {
-        if (password == result[0].password) {
-          resolve({ message: 'Welcome Back!', err: false, userId: result[0].user_id, username: result[0].username});
+        if (bcrypt.compareSync(password, result[0].password)) {
+          var token = jwt.sign({ id: result[0].user_id }, 'shhhhh', {expiresIn: 86400,});
+          resolve({ message: 'Welcome Back!', err: false, userId: result[0].user_id, username: result[0].username, token: token});
         }
       }
     });
   });
+};
+
+User.checkToken = (token) => {
+  return new Promise((resolve) => {
+    jwt.verify(token, 'shhhhh', (err, decoded) => {
+      if(err) {
+        resolve({ message: "error", err: err });
+      }
+      resolve({ message: "auth", decoded: decoded });
+  })
+  })
 };
 
 module.exports = User;

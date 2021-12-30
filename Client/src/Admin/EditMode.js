@@ -17,7 +17,7 @@ function EditMode(props) {
             }}
           >
                <p className="vac-del"><button className="del-btn" onClick={() => props.DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 
-                {props.isToEdit(vacation.vacation_id, vacation.title, vacation.dates, vacation.price, vacation.country)}
+                {props.isToEdit(vacation.vacation_id, vacation.title, vacation.start_date, vacation.price, vacation.country, vacation.end_date)}
           </div>
           <div className="clear"></div>
         </div>)}</div>

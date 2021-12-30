@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import "./SignModalStyle.css";
 import { UserContext } from "../Context/UserProvider";
 
+
 export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const [isLogin, setIsLogin] = useState(true)
   const [firstName, setFirstName] = useState()
@@ -11,17 +12,11 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [message, setMessage] = useState('')
-  const [userNow, setUserNow] = useState(() => {
-    const localData = localStorage.getItem('userNow')
-    return localData ? JSON.parse(localData) : [] 
-  });
+  const [userNow, setUserNow] = useState(useContext(UserContext))
 
   useEffect(() => {
     localStorage.setItem('userNow', JSON.stringify(userNow))
-    setIsOpen(false);
     }, [userNow]);
-
-  // const user = { firstName: firstName, lastName: lastName, username: username, password: password };
 
   if (!isOpen) return null;
 
@@ -35,27 +30,19 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   }
 
   const addUser = async () => {
-      await fetch("http://127.0.0.1:4000/create", {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',  
-      body: JSON.stringify({firstName: firstName, lastName: lastName, username: username, password: password})
-    })
-    .then(response => response.json())
-    .catch(error => {
+      await axios.post("http://127.0.0.1:4000/create", {
+        firstName: firstName, 
+        lastName: lastName, 
+        username: username, 
+        password: password
+      })
+    .then(response => {
+      console.log(response)
+        setMessage(<p style={response.data.err? {color: "red"}: {color: "black"}}>{response.data.message}</p>)
+        setUserNow({id: response.data.id, username: username})
+      }
+    ).catch(error => {
       console.error('There was an error!', error);
-  })
-  .then(response => {
-    if (response.err) {
-      {setMessage(<p style={{color: "red"}}>{response.message}</p>)}
-    }
-    else{{setMessage(<p style={{color: "black"}}>{response.message}</p>)}
-    }
   });
   }
 
@@ -71,8 +58,8 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
         {setMessage(<p style={{color: "red"}}>{response.data.message}</p>)}
       } else {
         setUserNow({id: response.data.userId, username: response.data.username})
+        localStorage.setItem('token', response.data.token)
         window.location.reload()
-
       }
     })
     .catch(error => {
@@ -84,14 +71,14 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
       if (isLogin === false) {
       return (
         <form className="form-signup">
-        <label for="firstName">first Name</label>
-        <input className="firstName" type="text" name="firstName" onChange={(event) => {setFirstName(event.target.value)}}/><br></br>
-        <label for="lastName">Last name</label>
-        <input className="lastName" type="text" name="lastName" onChange={(event) => {setLastName(event.target.value)}}/><br></br>
-        <label for="username">Username</label>
-        <input className="fullName" type="text" name="username" onChange={(event) => {setUsername(event.target.value)}}/><br></br>
-        <label for="password">Password</label>
-        <input className="fullName" type="text" name="password" onChange={(event) => {setPassword(event.target.value)}}/><br></br>
+        <label for="firstName" style={{color: "#efefef"}}>First Name</label>
+        <input className="sign-input" type="text" name="firstName" onChange={(event) => {setFirstName(event.target.value)}}/><br></br>
+        <label for="lastName" style={{color: "#efefef"}}>Last name</label>
+        <input className="sign-input" type="text" name="lastName" onChange={(event) => {setLastName(event.target.value)}}/><br></br>
+        <label for="username" style={{color: "#efefef"}}>Username</label>
+        <input className="sign-input" type="text" name="username" onChange={(event) => {setUsername(event.target.value)}}/><br></br>
+        <label for="password" style={{color: "#efefef"}}>Password</label>
+        <input className="sign-input" type="text" name="password" onChange={(event) => {setPassword(event.target.value)}}/><br></br>
         <input type="checkbox" id="checkbox" />
         <label for="checkbox">
           <span className="ui"></span>Keep me signed in
@@ -105,18 +92,18 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
       </form>
       )} else {
           return (
-        <form className="form-login-active" action="" method="post" name="form">
-        <label for="username">Username</label>
+        <form className="form-signup" action="" method="post" name="form">
+        <label style={{color: "#efefef"}} for="username">Username</label>
         <input
-          className="form-styling"
+          className="sign-input"
           type="text"
           name="username"
           placeholder=""
           onChange={(event) => setUsername(event.target.value)}
-        />
-        <label for="password">Password</label>
+        /><br></br>
+        <label style={{color: "#efefef"}} for="password">Password</label>
         <input
-          className="form-styling"
+          className="sign-input"
           type="text"
           name="password"
           placeholder=""
@@ -145,16 +132,10 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
     >
       <div className="sign-frame">
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
-        <button onClick={closeModal}>close</button>
+        <button onClick={closeModal} className='close-btn'>close</button>
         <div className="sign-nav">
-          <ul className="sign-links">
-            <li className="login-active">
-              <a className="login-btn" onClick={()=>{setIsLogin(true); setMessage('')}}>login</a>
-            </li>
-            <li className="signup-inactive">
-             <a className="sign-btn" onClick={()=>{setIsLogin(false); setMessage('')}}>Sign up</a>
-            </li>
-          </ul>
+              <button className="login-btn" onClick={()=>{setIsLogin(true); setMessage('')}}>Login</button>
+             <button className="login-btn" onClick={()=>{setIsLogin(false); setMessage('')}}>Sign up</button>
         </div>
         {logSwitch()}
       </div>

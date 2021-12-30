@@ -5,11 +5,12 @@
     transform: translate(-50%, -50%);
     padding-top: 60px;
     padding-bottom: 100px;
+    height: 400px;
     outline: none; 
   }
 
   .add-frame {
-    height: 270px;
+    height: 300px;
     width: 250px;
     background:
       linear-gradient(

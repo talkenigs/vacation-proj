@@ -27,7 +27,6 @@ exports.getVacations = async (req, res) => {
     const vacList = await Vacations.getAllVacs()
     const userList = await Vacation.getUserVacs(req.query.user)
     const ans = {vacList, userList}
-    // console.log(ans.userList.listUser[0].vacation_id)
     res.send(ans)
     }
 
@@ -37,12 +36,12 @@ exports.delVacation = async (req, res) => {
 }
 
 exports.updateVacation = async (req, res) => {
-  let ans = await Vacations.updateVacation(req.body.id, req.body.title, req.body.dates, req.body.price, req.body.country)
+  let ans = await Vacations.updateVacation(req.body.id, req.body.title, req.body.start_date, req.body.price, req.body.country, req.body.end_date)
   res.send(ans)
 }
 
 exports.addVacation = async (req, res) => {
-  let ans =  await Vacations.addVacation(req.body.title, req.body.country, req.body.dates, req.body.price)
+  let ans =  await Vacations.addVacation(req.body.title, req.body.country, req.body.start_date, req.body.price, req.body.end_date)
   res.send(ans)
 }
 

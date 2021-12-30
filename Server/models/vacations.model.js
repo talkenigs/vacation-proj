@@ -4,13 +4,14 @@ const sql = require("./db.js");
 function Vacation(vacation) {
     this.title = vacation.title;
     this.country = vacation.country;
-    this.dates = vacation.dates;
+    this.start_date = vacation.start_date;
+    this.end = vacation.end;
     this.price = vacation.price;
     this.image = vacation.image;
   }
 
   Vacation.getAllVacs = () => {
-    let queryAll = `SELECT vacations.vacation_id, title, country, dates, price, image FROM vacations`
+    let queryAll = `SELECT vacations.vacation_id, title, country, start_date, price, end_date FROM vacations`
     return new Promise((resolve) => {
       sql.query(queryAll, function (err, result) {
         if (err) throw err;
@@ -40,19 +41,20 @@ function Vacation(vacation) {
       })
     })}
 
-    Vacation.updateVacation = (id, title, dates, price, country) => {
-      let queryPut =  "UPDATE vacations SET title=(?), dates=(?), price=(?), country=(?) WHERE vacation_id = (?);"
+    Vacation.updateVacation = (id, title, start_date, price, country, end_date) => {
+      console.log(start_date, price, country, end_date)
+      let queryPut =  "UPDATE vacations SET title=(?), start_date=(?), price=(?), country=(?), end_date=(?) WHERE vacation_id = (?);"
       return new Promise((resolve) => {
-        sql.query(queryPut, [title, dates, price, country, id], (err, result) => {
+        sql.query(queryPut, [title, start_date, price, country, end_date, id], (err, result) => {
           if (err) throw err;
           resolve({message: "updated", result: result})
         })
       })}
 
-      Vacation.addVacation = (title, country, dates, price) => {
-        let queryAdd = "INSERT INTO vacations (title, country, dates, price) VALUES ((?),(?),(?),(?));"
+      Vacation.addVacation = (title, country, start_date, price, end_date) => {
+        let queryAdd = "INSERT INTO vacations (title, country, start_date, price, end_date) VALUES ((?),(?),(?),(?),(?));"
         return new Promise((resolve) => {
-          sql.query(queryAdd, [title, country, dates, price], (err, result) => {
+          sql.query(queryAdd, [title, country, start_date, price, end_date], (err, result) => {
             if (err) throw err;
             resolve({message: "updated", result: result})
           })

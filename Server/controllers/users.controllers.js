@@ -40,8 +40,8 @@ exports.findAll = (req, res) => {
     });
   };
 
-  exports.test = async (req, res) => {
-    res.send(await User.test(req))
-    // const semak = await User.test(req)
-    // res.send(semak)
+  exports.checkToken = async (req, res) => {
+    const ans = await User.checkToken(req.query.token)
+    res.send(ans)
   } 
+  

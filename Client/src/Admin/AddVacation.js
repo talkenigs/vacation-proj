@@ -6,7 +6,8 @@ import axios from "axios";
 function AddVacation({ isOpen, subtitle, setIsOpen }) {
     const [title, setTitle] = useState()
     const [country, setCountry] = useState()
-    const [dates, setDates] = useState()
+    const [start_date, setStart] = useState()
+    const [end_date, setEnd] = useState()
     const [price, setPrice] = useState()
   // function afterOpenModal() {
   //     // references are now sync'd and can be accessed.
@@ -21,8 +22,9 @@ function AddVacation({ isOpen, subtitle, setIsOpen }) {
       await axios.post("http://127.0.0.1:4000/addVacation", {
           title: title,
           country: country,
-          dates: dates,
-          price: price
+          start_date: start_date,
+          price: price,
+          end_date: end_date
       }).then((res) => {
           console.log(res)
       })
@@ -56,10 +58,18 @@ function AddVacation({ isOpen, subtitle, setIsOpen }) {
           />
           </div>
           <div className="input-div">
-          <label for="Dates">Dates:</label>
-          <input className="Dates" type="text" name="Dates"
+          <label for="startDate">Start date:</label>
+          <input className="Dates" type="text" name="startDate"
             onChange={(event) => {
-              setDates(event.target.value);
+              setStart(event.target.value);
+            }}
+          />
+          </div>
+          <div className="input-div">
+          <label for="endDate">End date:</label>
+          <input className="Dates" type="text" name="endDate"
+            onChange={(event) => {
+              setEnd(event.target.value);
             }}
           />
           </div>

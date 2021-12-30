@@ -18,4 +18,6 @@ module.exports = app => {
     app.post("/addVacation", Vacations.addVacation)
 
     app.get("/getChart", Vacations.getChart)
+
+    app.get("/token", Users.checkToken)
   };

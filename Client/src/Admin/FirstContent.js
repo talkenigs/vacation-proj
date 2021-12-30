@@ -13,17 +13,15 @@ function FirstContent(props) {
       for (let i in vacationList) {
         if (vacationList[i].vacation_id === data.vacation_id) {
           vacationList[i].title = data.title
-          vacationList[i].country = data.copuntry
-          vacationList[i].dates = data.dates
+          vacationList[i].country = data.country
+          vacationList[i].start_date = data.start_date+'T'
+          vacationList[i].end_date = data.end_date+'T'
           vacationList[i].price = data.price
         }
       }
       setNew(true)
     })
-
-    useEffect(() => {
-    }, [newList])
-
+ 
     return (
         <>
            <div className="catalog-container">{vacationList && vacationList.map((vacation) => <div key={vacation.vacation_id} className="vacations-container">
@@ -35,13 +33,14 @@ function FirstContent(props) {
         >
              <p className="vac-del"><button className="del-btn" onClick={() => props.DeleteVacation(vacation.vacation_id)}><MdDelete /></button></p> 
             <div className="vac-row">
-            <p className="vac-title">{vacation.title}</p> 
+            <p className="data vac-title">{vacation.title}</p> 
             <p className="vac-edit"><button className="edit-btn" onClick={() => props.handleEdit(vacation.vacation_id)}><FaEdit /></button></p> 
             </div>
-          <p className="vac-dates-edit">{vacation.dates}</p>
-          <p className="vac-price-edit">{vacation.price}$</p>
+          <p className="data vac-dates-edit">{vacation.start_date.match(/.+?(?=T)/gm)} to {vacation.end_date.match(/.+?(?=T)/gm)}</p>
+          <p className="data vac-price-edit">{vacation.price}$</p>
         </div>
-        <div className="clear"></div>
+        <p className="data vac-country-edit">{vacation.country}</p>
+        {/* <div className="clear"></div> */}
       </div>)}</div>
         </>
     )};
