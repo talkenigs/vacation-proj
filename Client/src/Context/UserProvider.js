@@ -14,20 +14,23 @@ export function UserProvider({ children }) {
             }
         })
         .then((response) => {
+            if(response.data.decoded.id !== undefined){
             setUserNow({id: response.data.decoded.id, username: ''})
             localStorage.setItem('userNow', JSON.stringify({id: response.data.decoded.id, username: ''}))
+            }
         })
         .catch((err) => {
             console.log(err)
-            setUserNow({id: '', username: ''})
+            // setUserNow({id: '', username: ''})
         })
     }, [])
 
+
     return (
         <>
-            {userNow.username === null? <p>test</p>:<UserContext.Provider value={userNow} >
+            <UserContext.Provider value={userNow} >
             {children}
-            </UserContext.Provider>}
+            </UserContext.Provider>
         </>
     )
 }

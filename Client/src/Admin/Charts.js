@@ -7,12 +7,12 @@ function Charts() {
 const [chartData, setData] = useState()
 const [labels, setLabels] = useState()
 
-const getLabels = () => {
-    chartData.map((bar) => console.log(bar.title))
-}
+// const getLabels = () => {
+//     chartData.map((bar) => console.log(bar.title))
+// }
 
-    useEffect( async () => {
-        await axios.get("http://127.0.0.1:4000/getChart")
+    useEffect(() => {
+        axios.get("http://127.0.0.1:4000/getChart")
         .then((res) => res.data.data)
         .then((res) => {
             setLabels(res.map((vac) => vac.title))
@@ -21,7 +21,7 @@ const getLabels = () => {
     }, [])
 
     return (
-        <div>           
+        <div>     
             <Bar
             height={100}
             data={{

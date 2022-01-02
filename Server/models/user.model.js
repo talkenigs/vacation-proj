@@ -51,6 +51,7 @@ User.checkToken = (token) => {
       if(err) {
         resolve({ message: "error", err: err });
       }
+      // console.log(decoded)
       resolve({ message: "auth", decoded: decoded });
   })
   })

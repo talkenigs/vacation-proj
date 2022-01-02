@@ -9,10 +9,9 @@ export function VacationsProvider({ children }) {
     const [vacList, setList] = useState()
 
     useEffect(() => {    
-      console.log('test')
         axios.get("http://127.0.0.1:4000/getvacations", {
-             params: {
-               user: userNow.id
+             params: { 
+               user: userNow.id 
              }
            }).then((res) => {
              let userList = res.data.userList.listUser
