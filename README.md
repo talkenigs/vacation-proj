@@ -23,10 +23,10 @@ Heroku | cloud hosting
     * follow_id, user_id, vacation_id
 
 ## HOW TO USE ##
-   As for now, the website is not optimized for mobile.
-   In order to see the admin panel use:
-   Username: "x"
-   password: 123
+  a. As for now, the website is not optimized for mobile.
+  b. In order to see the admin panel use:
+     Username: "x"
+     password: 123
 
 ## HOW TO INSTALL ##
 1) Install sql with the database structure above
