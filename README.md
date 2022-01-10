@@ -11,8 +11,9 @@ React  | Interface
 Node.js  | Server
 MySql  | Database
 Axios  | Api services
-JWT  | authentication
-Heroku | cloud hosting
+JWT  | Authentication
+react-charts | Reports
+Heroku | Cloud hosting
 
 ## DATABASE STRUCTURE  ##
 * users
