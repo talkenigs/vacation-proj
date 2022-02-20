@@ -24,7 +24,7 @@ export default function Header() {
         <span>vacations@tal-kenigs.com</span>
         <span>|</span>
         <HiLocationMarker/>
-        <span>keren hayesod 31, Nesher, 385689</span>
+        <span>Moshe dayan 31, Raanana, 385689</span>
       </div>
       <div className="login">
         <BsPersonCircle/>

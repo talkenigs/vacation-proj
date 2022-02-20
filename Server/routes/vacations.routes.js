@@ -9,6 +9,8 @@ module.exports = app => {
 
     app.post("/addFollow", Vacations.Follow )
 
+    app.post("/getFollow", Vacations.getFollow )
+
     app.get("/getvacations", Vacations.getVacations)
 
     app.post("/delVacation", Vacations.delVacation)

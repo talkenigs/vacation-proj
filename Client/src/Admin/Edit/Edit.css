@@ -1,0 +1,68 @@
+
+.vac-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.vac-del {
+    float: right;
+    text-align: right;
+    margin-right: 10px;
+    padding-top: 10px;
+    width: 10%;
+}
+
+.vac-edit {
+    text-align: right; 
+    margin-right: 10px;
+
+}
+
+.vac-dates-edit {
+    top: 120px;
+    left: 20px;   
+}
+
+.vac-price-edit {
+    top: 130px;
+    left: 20px;
+}
+
+.vac-country-edit {
+    top: 200px;
+    left: 20px;
+}
+
+.vac-country-edit-inp {
+    color: black;
+    top: 160px;
+    left: 20px;
+}
+
+
+
+.del-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 1.2rem;
+}
+
+.edit-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 1.2rem;
+}
+
+.input {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+}

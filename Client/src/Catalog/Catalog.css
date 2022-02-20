@@ -5,9 +5,16 @@
     justify-content: space-around;
     align-items: center;
     align-content: center;
+    /* text-align: center; */
     margin-top:20px;
     margin-bottom: 40px;
+    width: 70%;
+    position: relative;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
 }
+
 
 .catalog-header {
     text-align: center;
@@ -28,7 +35,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
+    width: 21rem;
+    box-sizing: border-box;
 }
+.vac-box:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 2px rgb(9, 10, 10), 0 22px 43px rgba(0, 0, 0, 0.15)
+}
+
 
 .h1 {
     text-align: center;

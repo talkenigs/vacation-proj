@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce176c0c.chunk.css",
+    "main.js": "/static/js/main.58c0c0fc.chunk.js",
+    "main.js.map": "/static/js/main.58c0c0fc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.99ce0bb7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.99ce0bb7.js.map",
+    "static/js/2.c37987e6.chunk.js": "/static/js/2.c37987e6.chunk.js",
+    "static/js/2.c37987e6.chunk.js.map": "/static/js/2.c37987e6.chunk.js.map",
+    "static/js/3.9db0b951.chunk.js": "/static/js/3.9db0b951.chunk.js",
+    "static/js/3.9db0b951.chunk.js.map": "/static/js/3.9db0b951.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.ce176c0c.chunk.css.map": "/static/css/main.ce176c0c.chunk.css.map",
+    "static/js/2.c37987e6.chunk.js.LICENSE.txt": "/static/js/2.c37987e6.chunk.js.LICENSE.txt",
+    "static/media/Algarve.jpg": "/static/media/Algarve.698e2259.jpg",
+    "static/media/Haifa.jpg": "/static/media/Haifa.876827f7.jpg",
+    "static/media/Kauai.jpg": "/static/media/Kauai.e9d42af7.jpg",
+    "static/media/London.jpg": "/static/media/London.80ea3915.jpg",
+    "static/media/Miami.jpg": "/static/media/Miami.93c6c53b.jpg",
+    "static/media/Paris.jpg": "/static/media/Paris.b85a74c1.jpg",
+    "static/media/new.jpg": "/static/media/new.50ce9dce.jpg",
+    "static/media/resort.jpg": "/static/media/resort.61f8f204.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.99ce0bb7.js",
+    "static/js/2.c37987e6.chunk.js",
+    "static/css/main.ce176c0c.chunk.css",
+    "static/js/main.58c0c0fc.chunk.js"
+  ]
+}

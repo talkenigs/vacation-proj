@@ -30,7 +30,7 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   }
 
   const addUser = async () => {
-      await axios.post("http://127.0.0.1:4000/create", {
+      await axios.post("/create", {
         firstName: firstName, 
         lastName: lastName, 
         username: username, 
@@ -47,7 +47,7 @@ export default function SignModal({ isOpen, subtitle, setIsOpen }) {
   }
 
   const login = async () => {
-    await axios.get("http://127.0.0.1:4000/login", {
+    await axios.get("/login", {
       params: {
         username: username, 
         password: password

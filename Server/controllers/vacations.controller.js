@@ -3,8 +3,8 @@ const Vacation = require("../models/vacations.model");
 const Vacations = require("../models/vacations.model")
 
 exports.Follow = async (req, res) => {
-
-    const follow = new Follow({  
+  
+    const follow = new Follow({ 
         vacationId: req.body.vac,
         userId: req.body.user
       });
@@ -19,9 +19,17 @@ exports.Follow = async (req, res) => {
     }
 }
 
-// exports.delFollow = async (req, res) => {
-//   res.send({message: "done"})
-// }
+exports.getFollow = async (req, res) => {
+  const data = {
+    vacationId: req.body.vac,
+    userId: req.body.user
+  }
+  let ans = await Follow.checkFollow(data)
+  if (ans.isExist.length !== 0) {
+    res.send({message: "done", res: ans})
+  }
+
+}
 
 exports.getVacations = async (req, res) => {
     const vacList = await Vacations.getAllVacs()
@@ -36,7 +44,7 @@ exports.delVacation = async (req, res) => {
 }
 
 exports.updateVacation = async (req, res) => {
-  let ans = await Vacations.updateVacation(req.body.id, req.body.title, req.body.start_date, req.body.price, req.body.country, req.body.end_date)
+  let ans = await Vacations.updateVacation(req.body.vac)
   res.send(ans)
 }
 

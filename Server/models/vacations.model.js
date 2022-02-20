@@ -12,10 +12,11 @@ function Vacation(vacation) {
 
   Vacation.getAllVacs = () => {
     let queryAll = `SELECT vacations.vacation_id, title, country, start_date, price, end_date FROM vacations`
+
     return new Promise((resolve) => {
       sql.query(queryAll, function (err, result) {
         if (err) throw err;
-        resolve({ message: "Vacations List", listAll: JSON.parse(JSON.stringify(result))});
+        resolve({ message: "Vacations List", listAll: JSON.parse(JSON.stringify(result))}); 
       })
     });
   };
@@ -41,11 +42,11 @@ function Vacation(vacation) {
       })
     })}
 
-    Vacation.updateVacation = (id, title, start_date, price, country, end_date) => {
-      console.log(start_date, price, country, end_date)
+    Vacation.updateVacation = (vac) => {
       let queryPut =  "UPDATE vacations SET title=(?), start_date=(?), price=(?), country=(?), end_date=(?) WHERE vacation_id = (?);"
+
       return new Promise((resolve) => {
-        sql.query(queryPut, [title, start_date, price, country, end_date, id], (err, result) => {
+        sql.query(queryPut, [vac.title, vac.start_date, vac.price, vac.country, vac.end_date, vac.id], (err, result) => {
           if (err) throw err;
           resolve({message: "updated", result: result})
         })

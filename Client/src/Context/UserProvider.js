@@ -8,7 +8,7 @@ export function UserProvider({ children }) {
     const [userNow, setUserNow] = useState({id: '', username: null})
 
     useEffect(async () => {
-        await axios.get("http://127.0.0.1:4000/token", {
+        await axios.get("/token", {
             params: {
                 token: token
             }
@@ -21,7 +21,6 @@ export function UserProvider({ children }) {
         })
         .catch((err) => {
             console.log(err)
-            // setUserNow({id: '', username: ''})
         })
     }, [])
 

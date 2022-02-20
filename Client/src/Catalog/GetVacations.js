@@ -7,7 +7,7 @@ function GetVacations(callback) {
     const [vacList, setList] = useState("wait")
 
     useEffect(() => {    
-     axios.get("http://127.0.0.1:4000/getvacations", {
+     axios.get("/getvacations", {
           params: {
             user: userNow.id
           }

@@ -4,7 +4,7 @@ import axios from 'axios'
 function checkToken() {
     const token = localStorage.getItem('token')
     const check = async () => {
-        axios.get("http://127.0.0.1:4000/token", {
+        axios.get("/token", {
             params: {
                 token: token
             }

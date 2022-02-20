@@ -5,13 +5,15 @@ import { AiFillStar } from "react-icons/ai";
 import Follow from "./Follow";
 import { UserContext } from "../Context/UserProvider";
 import { VacationsContext} from '../Context/VacationsProvider'
+import { SocketContext } from "../Context/Socket"
 
 export default function Catalog(props) {
   const userNow = useContext(UserContext)
   const vacationList = useContext(VacationsContext)  
   const [newList, setNew] = useState(null)
+  const socket = useContext(SocketContext)
 
-  props.socket.on("catalog_update", (data) => {
+  socket.on("catalog_update", (data) => {
     for (let i in vacationList) {
       if (vacationList[i].vacation_id === data.vacation_id) {
         vacationList[i].title = data.title
@@ -27,11 +29,17 @@ export default function Catalog(props) {
   useEffect(() => {
   }, [newList])
 
+  const reviews = () => {
+  return Math.floor((Math.random() * 100 )+ 8)
+}
+
   return (
     <>
       <div className="catalog-header">
         <h1>Top Destionation</h1>
         <hr className="catalog-hr"></hr>
+        <p>What's on your travel bucket list?</p><br></br>
+
       </div>
       <div className="catalog-container">{vacationList && vacationList.map((vacation) => <div key={vacation.vacation_id} className="vacations-container">
         <div
@@ -50,11 +58,12 @@ export default function Catalog(props) {
             <GoLocation /> {vacation.country}
           </p>
           <p className="vac-reviews">
+
             <AiFillStar />
             <AiFillStar />
             <AiFillStar />
             <AiFillStar />
-            <AiFillStar /> 48{" "}
+            <AiFillStar /> {reviews()}
           </p>
         </div>
         <div className="clear"></div>
