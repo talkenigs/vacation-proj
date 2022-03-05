@@ -8,6 +8,7 @@ The app also contains an admin panel to edit / create vacations and show reports
 
 ## HOW TO USE ##
   Login & press on the "♡" to follow vacations
+  
   In order to see the admin panel use:
      Username: "x"
      password: 123
