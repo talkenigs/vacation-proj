@@ -26,7 +26,7 @@ Heroku | Cloud hosting
     * follow_id, user_id, vacation_id
 
 ## HOW TO USE ##
-  As for now, the website is not optimized for mobile.
+  Login & press on the "♡" to follow vacations
   In order to see the admin panel use:
      Username: "x"
      password: 123
